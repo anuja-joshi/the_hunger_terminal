@@ -1,0 +1,86 @@
+.container
+  .col-md-7
+    %table#cart.table.table-hover.table-condensed
+      %thead
+        %tr
+          %th{:style => "width:50%"} Product
+          %th{:style => "width:10%"} Price
+          %th{:style => "width:8%"} Quantity
+          %th.text-center{:style => "width:22%"} Subtotal
+          %th{:style => "width:10%"}
+      %tbody
+        - @menu_items.each do |menu_item|
+          %tr
+            %td{"data-th" => "Product"}
+              .row
+                .col-sm-12
+                  %h4.nomargin= menu_item.name
+                  %p= menu_item.terminal.name
+            %td{"data-th" => "Price"}
+              = menu_item.price
+            %td{"data-th" => "Quantity"}
+              %input.form-control.text-center{:type => "number", :value => "0"}/
+            %td.text-center{"data-th" => "Subtotal"} XXX
+
+  .col-md-5
+    .panel.panel-info
+      .panel-heading
+        .panel-title
+          .row
+            .col-xs-6
+              %h5
+                %span.glyphicon.glyphicon-shopping-cart
+                Food Cart
+      .panel-body
+        .row
+          .col-xs-4
+            %h4.product-name
+              %strong Product name
+            %h4
+              %small Product description
+          .col-xs-6
+            .col-xs-6.text-right
+              %h6
+                %strong
+                  25.00
+                  %span.text-muted x
+            .col-xs-4
+              %input.form-control.input-sm{:type => "text", :value => "1"}/
+            .col-xs-2
+              %button.btn.btn-link.btn-xs{:type => "button"}
+                %span.glyphicon.glyphicon-trash
+        %hr/
+        .row
+          .col-xs-4
+            %h4.product-name
+              %strong Product name
+            %h4
+              %small Product description
+          .col-xs-6
+            .col-xs-6.text-right
+              %h6
+                %strong
+                  25.00
+                  %span.text-muted x
+            .col-xs-4
+              %input.form-control.input-sm{:type => "text", :value => "1"}/
+            .col-xs-2
+              %button.btn.btn-link.btn-xs{:type => "button"}
+                %span.glyphicon.glyphicon-trash
+        %hr/
+        .row
+          .text-center
+            .col-xs-9
+              %h6.text-right Discount Applied
+            .col-xs-3
+              %h4 Amount
+      .panel-footer
+        .row.text-center
+          .col-xs-9
+            %h4.text-right
+              Total
+              %strong $50.00
+          .col-xs-3
+            %button.btn.btn-success.btn-block{:type => "button"}
+              Order
+

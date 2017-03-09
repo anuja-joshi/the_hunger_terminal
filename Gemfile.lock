@@ -204,8 +204,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bootstrap-sass
   aasm
+  bootstrap-sass
   byebug
   coffee-rails (~> 4.2)
   database_cleaner (~> 1.5, >= 1.5.1)
