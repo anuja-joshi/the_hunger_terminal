@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309121803) do
+ActiveRecord::Schema.define(version: 20170309163701) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,8 @@ ActiveRecord::Schema.define(version: 20170309121803) do
     t.string   "terminal_name"
     t.integer  "terminal_id"
     t.integer  "order_id"
+    t.integer  "menu_item_id"
+    t.index ["menu_item_id"], name: "index_order_details_on_menu_item_id", using: :btree
     t.index ["order_id"], name: "index_order_details_on_order_id", using: :btree
     t.index ["terminal_id"], name: "index_order_details_on_terminal_id", using: :btree
   end
@@ -96,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170309121803) do
   end
 
   add_foreign_key "menu_items", "terminals"
+  add_foreign_key "order_details", "menu_items"
   add_foreign_key "orders", "users"
   add_foreign_key "terminals", "companies"
   add_foreign_key "users", "companies"
