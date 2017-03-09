@@ -1,0 +1,36 @@
+.container
+  .row
+    .col-md-12
+      %h2 Terminals
+      .pull-right
+        = link_to 'New Terminal', new_terminal_path, class: "btn btn-success"
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th #
+            %th Name
+            %th Contact
+            %th Email
+            %th Tax
+            %th Delivery Charges 
+            %th Minimum Order Amount 
+            %th Status
+            %th Actions
+        %tbody
+          - @terminals.each_with_index do |terminal, index|
+            %tr
+              %td= index+1
+              %td= terminal.name
+              %td= terminal.landline
+              %td= terminal.email
+              %td= "#{terminal.tax}%"
+              %td= "#{terminal.delivery_charges}/-"
+              %td= "#{terminal.minimum_delivery}/-"
+              %td= terminal.active ? "Active" : "Inactive"
+              %td
+                = link_to 'View', terminal_path(terminal)
+                = link_to 'Edit', edit_terminal_path(terminal)
+                = link_to 'Delete', terminal_path(terminal), method: :delete, data: { confirm: 'Are you sure?' }
+      = paginate @terminals
+
+

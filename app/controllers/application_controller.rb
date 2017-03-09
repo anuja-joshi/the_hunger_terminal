@@ -3,6 +3,6 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user! 
 
   def after_sign_in_path_for(resource)
-    company_users_path(resource.company)
+    users_path
   end
 end

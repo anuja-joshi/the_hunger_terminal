@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309163701) do
+ActiveRecord::Schema.define(version: 20170309170649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,14 +23,28 @@ ActiveRecord::Schema.define(version: 20170309163701) do
     t.float    "subsidy"
   end
 
+  create_table "ledgers", force: :cascade do |t|
+    t.integer  "terminal_id"
+    t.date     "date"
+    t.integer  "orders_count"
+    t.float    "orders_amount"
+    t.float    "balance"
+    t.float    "discount"
+    t.string   "transaction_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["terminal_id"], name: "index_ledgers_on_terminal_id", using: :btree
+  end
+
   create_table "menu_items", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "veg"
     t.float    "price"
     t.integer  "terminal_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.boolean  "visibility",  default: true
+    t.string   "image"
+    t.boolean  "available",   default: false
     t.index ["terminal_id"], name: "index_menu_items_on_terminal_id", using: :btree
   end
 
@@ -64,9 +78,15 @@ ActiveRecord::Schema.define(version: 20170309163701) do
     t.string   "name"
     t.string   "landline"
     t.integer  "company_id"
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.boolean  "active",     default: true
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.boolean  "active",           default: true
+    t.string   "logo"
+    t.float    "tax",              default: 0.0
+    t.string   "email"
+    t.float    "delivery_charges", default: 0.0
+    t.float    "minimum_delivery", default: 0.0
+    t.float    "balance",          default: 0.0
     t.index ["company_id"], name: "index_terminals_on_company_id", using: :btree
   end
 
@@ -97,6 +117,7 @@ ActiveRecord::Schema.define(version: 20170309163701) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
 
+  add_foreign_key "ledgers", "terminals"
   add_foreign_key "menu_items", "terminals"
   add_foreign_key "order_details", "menu_items"
   add_foreign_key "orders", "users"
