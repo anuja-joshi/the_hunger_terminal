@@ -1,0 +1,8 @@
+%table.table
+  %tr
+    %th Name
+    %th email
+  - @users.each do |u|
+    %tr
+      %td= u.name
+      %td= u.email

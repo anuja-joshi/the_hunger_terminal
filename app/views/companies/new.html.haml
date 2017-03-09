@@ -1,0 +1,36 @@
+.col-lg-3
+.col-lg-6
+  = simple_nested_form_for(@company) do |c|
+    .col-lg-12
+      %h3 Company Details
+    .col-lg-8
+      .form-group
+        = c.input :name, class: 'form-control'
+    .col-lg-4
+      .form-group
+        = c.input :landline, class: 'form-control'
+    .col-lg-12
+      %h3 Admin Details
+    = c.fields_for :users do |u|
+      .col-lg-8
+        .form-group
+          = u.input :name, class: 'form-control'
+      .col-lg-4
+        .form-group
+          = u.input :mobile, class: 'form-control'
+      .col-lg-12
+        .form-group
+          = u.input :email, class: 'form-control'
+      .col-lg-12
+        .form-group
+          = u.label :password
+          = u.password_field :password, class: 'form-control'
+      .col-lg-12
+        .form-group
+          = label_tag "Confirm Password"
+          = u.password_field :password_confirmation, class: 'form-control'
+    .col-lg-12
+      = c.submit 'Sign up', class: "btn btn-success"
+.col-lg-3
+
+

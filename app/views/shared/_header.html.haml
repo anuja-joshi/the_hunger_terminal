@@ -1,6 +1,10 @@
 %nav.navbar.navbar-inverse
   .container-fluid
     .navbar-header
-      %a.navbar-brand{:href => "#"}
-        %img{:alt => "The Hunger Terminal"}
-
+      %a.navbar-brand{:href => root_path}
+        %img{:alt => "The Hunger Terminal", :src => "#"}
+    - unless user_signed_in?
+      = link_to  "Login", new_user_session_path, class: 'btn btn-default navbar-btn pull-right nav-buttons'
+      = link_to  "Signup", new_company_path, class: 'btn btn-default navbar-btn pull-right nav-buttons'
+    - else
+      = link_to  "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-default navbar-btn pull-right nav-buttons'
