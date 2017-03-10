@@ -11,7 +11,7 @@
           %th.text-center{:style => "width:32%"} Subtotal
       %tbody
         - @menu_items.each do |menu_item|
-          %tr
+          %tr{:id => "#{menu_item.id}"} 
             %td{"data-th" => "Product"}
               .row
                 .col-sm-12
@@ -39,20 +39,14 @@
                   Food Cart
         .panel-body
           .order-details
-          %hr/
-          .row
-            .text-center
-              .col-xs-9
-                %h6.text-right Discount Applied
-              .col-xs-3
-                %h6 Amount: 50
+          
           #order_details
         .panel-footer
           .row.text-center
             .col-xs-8
               %h4.text-right
                 Total
-                %strong $50.00
+                %strong#total $0.00
             .col-xs-4
               %button.btn.btn-success.btn-block{:type => "submit"}
                 Place Order
@@ -72,14 +66,13 @@
           {{vendor_name}}
 
     .col-xs-6
-      .col-xs-6.text-right
-        %h6
-          %strong
-            {{total}}
-          %span.text-muted x
       .col-xs-4
         %input.form-control.input-sm#order_detail_qty{:type => "text", :value => "{{quantity}}", name: "order[order_details_attributes][{{menu_item_id}}][quantity]"}
+      .col-xs-6.text-right
+        %h6
+          %strong.total
+            $ {{total}}
       .col-xs-2
-        %button.btn.btn-link.btn-xs{:type => "button"}
+        %button.btn.btn-link.btn-xs.delete{:type => "button"}
           %span.glyphicon.glyphicon-trash
   {{/.}}
